@@ -10,7 +10,7 @@ namespace AspNetCoreExample.Automapper
     {
         public MapperProfile()
         {
-            CreateMap<SqlData.Northwind.Products, Domain.Product>()
+            CreateMap<SqlData.Northwind.Products, Domain.Northwind.Product>()
                 .ForMember(dest => dest.Id,
                             opt => opt.MapFrom(src => src.ProductId)
                 )
@@ -22,20 +22,12 @@ namespace AspNetCoreExample.Automapper
                 )
                 .ReverseMap();
 
-            CreateMap<SqlData.Northwind.Categories, Domain.Category>()
+            CreateMap<SqlData.Northwind.Categories, Domain.Northwind.Category>()
                 .ForMember(dest => dest.Id,
                             opt => opt.MapFrom(src => src.CategoryId)
                 )
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.CategoryName)
-                )
-                .ReverseMap();
-            CreateMap<SqlData.Northwind.OrderDetails, Domain.OrderDetail>()
-                .ForMember(dest => dest.Id,
-                            opt => opt.MapFrom(src => src.OrderId)
-                )
-                .ForMember(dest => dest.Quantity,
-                            opt => opt.MapFrom(src => src.Quantity)
                 )
                 .ReverseMap();
         }

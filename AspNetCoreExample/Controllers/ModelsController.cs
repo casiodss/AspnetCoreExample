@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreExample.Repository;
 using AspNetCoreExample.SqlData.Northwind;
@@ -12,24 +13,24 @@ using Microsoft.EntityFrameworkCore;
 namespace AspNetCoreExample.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Products")]
-    public class ProductsController : Controller
+    [Route("api/Models")]
+    public class ModelsController : Controller
     {
         private IMapper _mapper;
-        private IUnitOfWork<NORTHWNDContext> _northwindUnitOfWork;
+        private IUnitOfWork<VEgaContext> _vegaUnitOfWork;
 
-        public ProductsController(IMapper mapper, IUnitOfWork<NORTHWNDContext> northwindUnitOfWork)
+        public ModelsController(IMapper mapper, IUnitOfWork<VEgaContext> vegaUnitOfWork)
         {
             _mapper = mapper;
-            _northwindUnitOfWork = northwindUnitOfWork;
+            _vegaUnitOfWork = vegaUnitOfWork;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get() {
             try
             {
-                var products = _northwindUnitOfWork.Repository<Products>().Where(x => x.CategoryId > 0).Include(y => y.Category);
-                var mapped = _mapper.Map<IEnumerable<Products>, IEnumerable<Domain.Northwind.Product>>(products);
+                var models = _vegaUnitOfWork.Repository<SqlData.Vega.Models>().GetAll().Include(x => x.Make);
+                var mapped = _mapper.Map<IEnumerable<SqlData.Vega.Models>, IEnumerable<Domain.Vega.Models>>(models);
                 return Ok(mapped);
             }
             catch (Exception ex)

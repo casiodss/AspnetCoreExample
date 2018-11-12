@@ -6,7 +6,7 @@ namespace AspNetCoreExample.SqlData.Northwind
 {
     public partial class NORTHWNDContext : DbContext
     {
-        public NORTHWNDContext(DbContextOptions options) : base(options) { }
+        public NORTHWNDContext(DbContextOptions<NORTHWNDContext> options) : base(options) { }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
         public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }

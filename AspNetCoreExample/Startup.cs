@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AspNetCoreExample.Domain;
 using AspNetCoreExample.Repository;
 using AspNetCoreExample.SqlData.Northwind;
+using AspNetCoreExample.SqlData.Vega;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,8 +28,10 @@ namespace AspNetCoreExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<VEgaContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Vega")));
             services.AddDbContext<NORTHWNDContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Northwind")));
-            services.AddScoped<IRepository<Products>, Repository<Products>>();
+            services.AddScoped<IUnitOfWork<NORTHWNDContext>, UnitOfWork<NORTHWNDContext>>();
+            services.AddScoped<IUnitOfWork<VEgaContext>, UnitOfWork<VEgaContext>>();
 
             services.AddAutoMapper();
             services.AddMvc();

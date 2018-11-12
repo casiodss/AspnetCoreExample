@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AspNetCoreExample.Domain
+namespace AspNetCoreExample.Domain.Vega
 {
-    public class Category
+    public partial class Makes
     {
         public int Id { get; set; }
         public string Name { get; set; }

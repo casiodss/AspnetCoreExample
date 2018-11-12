@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AspNetCoreExample.Domain
+namespace AspNetCoreExample.Domain.Northwind
 {
-    public class OrderDetail
+    public class Category
     {
         public int Id { get; set; }
-        public string Quantity { get; set; }
+        public string Name { get; set; }
     }
 }
